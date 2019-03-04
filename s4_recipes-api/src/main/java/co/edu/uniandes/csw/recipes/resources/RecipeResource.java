@@ -55,7 +55,7 @@ public class RecipeResource {
 
         RecipeEntity recipeEntity = recipe.toEntity();
 
-        RecipeEntity nuevoRecipeEntity = RecipeLogic.createRecipe(recipeEntity);
+        RecipeEntity nuevoRecipeEntity = recipeLogic.createRecipe(recipeEntity);
 
         RecipeDTO nuevoRecipeDTO = new RecipeDTO(nuevoRecipeEntity);
 
