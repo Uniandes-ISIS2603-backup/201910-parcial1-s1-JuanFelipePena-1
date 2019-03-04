@@ -54,6 +54,8 @@ public class RecipePersistenceTest {
 
         RecipeEntity entity = em.find(RecipeEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getName(), entity.getName());        
+        Assert.assertEquals(newEntity.getName(), entity.getName());
+        
+        
     }
 }

@@ -48,6 +48,8 @@ public class RecipeLogic {
                     "\" o la descripción es vacía o supera el límite de carácteres");
         }
         
+        // falta algo if( )
+        
         persistence.createRecipe(recipeEntity);
 
         return recipeEntity;
