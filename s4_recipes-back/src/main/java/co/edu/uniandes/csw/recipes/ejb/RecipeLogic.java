@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.recipes.ejb;
 
 import co.edu.uniandes.csw.recipes.entities.RecipeEntity;
+import co.edu.uniandes.csw.recipes.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.recipes.persistence.RecipePersistence;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -24,6 +25,31 @@ public class RecipeLogic {
     }
 
     //TODO crear el método createRecipe
+    public RecipeEntity createRecipe (RecipeEntity recipeEntity) throws BusinessLogicException
+    {
+        String nombre = persistence.find(recipeEntity.getId()).getName();
+        
+        String descripcion = persistence.find(recipeEntity.getId()).getDescription();
+        
+        if(nombre != null)
+        {
+             throw new BusinessLogicException("Ya existe una Recipe con el nombre \"" + recipeEntity.getName());
+        }
+        
+        if( nombre.equals("") || nombre.length() > 30)
+        {
+            throw new BusinessLogicException( 
+                    "\" el nombre es vacío o supera el límite de carácteres");
+        }
+        
+        if( descripcion.equals("") || descripcion.length() > 150)
+        {
+            throw new BusinessLogicException( 
+                    "\" o la descripción es vacía o supera el límite de carácteres");
+        }
+        
+        persistence.createRecipe(recipeEntity);
 
-
+        return recipeEntity;
+    }
 }

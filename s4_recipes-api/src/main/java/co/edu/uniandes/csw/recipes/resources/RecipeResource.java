@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.recipes.resources;
 
 import co.edu.uniandes.csw.recipes.dtos.RecipeDetailDTO;
+import co.edu.uniandes.csw.recipes.dtos.RecipeDTO;
 import co.edu.uniandes.csw.recipes.ejb.RecipeLogic;
 import co.edu.uniandes.csw.recipes.entities.RecipeEntity;
 import co.edu.uniandes.csw.recipes.exceptions.BusinessLogicException;
@@ -47,6 +48,18 @@ public class RecipeResource {
         if (recipe == null) 
             throw new WebApplicationException("La recipe no existe");
         return new RecipeDetailDTO(recipe); 
+    }
+    //TODO
+    public RecipeDTO createRecipe (RecipeDTO recipe) throws BusinessLogicException
+    {
+
+        RecipeEntity recipeEntity = recipe.toEntity();
+
+        RecipeEntity nuevoRecipeEntity = RecipeLogic.createRecipe(recipeEntity);
+
+        RecipeDTO nuevoRecipeDTO = new RecipeDTO(nuevoRecipeEntity);
+
+        return nuevoRecipeDTO;
     }
     
 }
